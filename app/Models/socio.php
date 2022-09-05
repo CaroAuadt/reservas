@@ -12,7 +12,8 @@ class socio extends Model
     use SoftDeletes;
 
     protected $table='socios';
-    protected $fillables=['dni','nombre','apellido','celular','email', 'fecha_alta'];
+    protected $fillable=['dni','nombre','apellido','celular','email'];
 
-    protected $date= ['fecha_alta'];
+
+    protected $dateFormat = 'T';
 }

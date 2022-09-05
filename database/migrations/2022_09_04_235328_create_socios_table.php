@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('apellido');
             $table->string('celular');
             $table->string('email')->nullable();
-            $table->timestamp('fecha_alta');
             $table->softDeletes();
             $table->timestamps();
 

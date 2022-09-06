@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SocioRequest;
-use App\Models\socio;
+use App\Models\Socio;
 use Illuminate\Http\Request;
 
+/**
+ * Class SocioController
+ * @package App\Http\Controllers
+ */
 class SocioController extends Controller
 {
     /**
@@ -15,8 +19,11 @@ class SocioController extends Controller
      */
     public function index()
     {
-        $socios= socio::orderBy('apellido')->orderBy('nombre')->paginate(10);
-        return view('socio.index', compact('socios'));
+
+        $socios = Socio::paginate();
+
+        return view('socio.index', compact('socios'))
+            ->with('i', (request()->input('page', 1) - 1) * $socios->perPage());
     }
 
     /**
@@ -26,70 +33,84 @@ class SocioController extends Controller
      */
     public function create()
     {
-        return view('socio.create');
+
+        $socio = new Socio();
+        return view('socio.create', compact('socio'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(SocioRequest $request)
     {
         $datos=$request->validated();
 
-        $socio= socio::create($datos);
+        $socio= Socio::create($datos);
 
-        return redirect()->route('socio.index');
+
+        return redirect()->route('socios.index')
+            ->with('success', 'Socio creado satisfactoriamente.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\socio  $socio
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(socio $socio)
+     public function show($id)
     {
-        return view('socio.show', compact('socio'));
-    }
+         $socio = Socio::find($id);
 
+         return view('socio.show', compact('socio'));
+     }
+    // public function show(ocio $socio)
+    // {
+    //     return view('socio.show', compact('socio'));
+    // }
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\socio  $socio
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(socio $socio)
+    public function edit($id)
     {
+        $socio = Socio::find($id);
+
         return view('socio.edit', compact('socio'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\socio  $socio
+     * @param  \Illuminate\Http\Request $request
+     * @param  Socio $socio
      * @return \Illuminate\Http\Response
      */
-    public function update(SocioRequest $request, socio $socio)
+    public function update(SocioRequest $request, Socio $socio)
     {
         $datos= $request->validated();
 
         $socio->update($datos);
-        return redirect()->route('socio.index');
+
+        return redirect()->route('socios.index')
+            ->with('success', 'Socio actualizado satisfactoriamente');
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\socio  $socio
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
-    public function destroy(socio $socio)
+    public function destroy($id)
     {
-        $socio->delete();
-        return redirect()->route('socio.index');
+        $socio = Socio::find($id)->delete();
+
+        return redirect()->route('socios.index')
+            ->with('success', 'Socio eliminado satisfactoriamente');
     }
 }

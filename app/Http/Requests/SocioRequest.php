@@ -23,10 +23,11 @@ class SocioRequest extends FormRequest
      */
     public function rules()
     {
+
         return [
             'nombre' => 'required|max:255',
             'apellido' => 'required|max:255',
-            'dni' => 'required|numeric|digits:8|unique:socios,dni,'.$this->socio->id,
+            'dni' => 'required|numeric|digits:8|unique:socios,dni,'.$this->id,
             'celular' => 'required|max:255',
             'email' => 'nullable|email',
         ];

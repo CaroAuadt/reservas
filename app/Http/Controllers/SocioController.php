@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SocioRequest;
 use App\Models\socio;
 use Illuminate\Http\Request;
 
@@ -34,15 +35,9 @@ class SocioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SocioRequest $request)
     {
-        $datos=$request->validate([
-            'nombre' => 'required|max:255',
-            'apellido' => 'required|max:255',
-            'dni' => 'required|numeric|digits:8',
-            'celular' => 'required|max:255',
-            'email' => 'nullable|email',
-        ]);
+        $datos=$request->validated();
 
         $socio= socio::create($datos);
 
@@ -57,7 +52,7 @@ class SocioController extends Controller
      */
     public function show(socio $socio)
     {
-        //
+        return view('socio.show', compact('socio'));
     }
 
     /**
@@ -68,7 +63,7 @@ class SocioController extends Controller
      */
     public function edit(socio $socio)
     {
-        //
+        return view('socio.edit', compact('socio'));
     }
 
     /**
@@ -78,9 +73,12 @@ class SocioController extends Controller
      * @param  \App\Models\socio  $socio
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, socio $socio)
+    public function update(SocioRequest $request, socio $socio)
     {
-        //
+        $datos= $request->validated();
+
+        $socio->update($datos);
+        return redirect()->route('socio.index');
     }
 
     /**

@@ -1,7 +1,7 @@
 @extends('layouts.app');
 @section('contenido')
 
-<h3> Agregar Socio</h3>
+<h3> Editar Socio {{ $socio->apellido . ", ". $socio->nombre }}</h3>
 @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
@@ -11,7 +11,9 @@
         </ul>
     </div>
 @endif
-<form action="{{ route('socio.store') }}" method="POST">
-   <x-socio-form-body/>
+<form action="{{ route('socio.update', $socio) }}" method="POST">
+    @method('put')
+   <x-socio-form-body :socio="$socio"/>
+
 </form>
 @endsection

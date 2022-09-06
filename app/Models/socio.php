@@ -15,5 +15,5 @@ class socio extends Model
     protected $fillable=['dni','nombre','apellido','celular','email'];
 
 
-    protected $dateFormat = 'T';
+
 }

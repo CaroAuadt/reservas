@@ -49,8 +49,13 @@
             <td> {{ $socio->email }} </td>
 
             <td> {{ $socio->created_at->format('d/m/Y H:i') }} </td>
+            <td>   <a href="{{ route('socio.edit', $socio) }}">Editar</a>
+                    <a href="{{ route('socio.show', $socio) }}">Ver</a>
+
+            </td>
             @endforeach
         </tr>
+
     </tbody>
 </table>
 @endsection

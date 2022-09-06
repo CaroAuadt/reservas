@@ -89,6 +89,7 @@ class SocioController extends Controller
      */
     public function destroy(socio $socio)
     {
-        //
+        $socio->delete();
+        return redirect()->route('socio.index');
     }
 }

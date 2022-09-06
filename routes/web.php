@@ -23,3 +23,4 @@ Route::get('socio/listar', [SocioController::class, 'index'])->name('socio.index
 Route::get('socio/{socio}/editar', [SocioController::class, 'edit'])->name('socio.edit');
 Route::get('socio/{socio}/ver', [SocioController::class, 'show'])->name('socio.show');
 Route::put('socio/{socio}/actualizar', [SocioController::class, 'update'])->name('socio.update');
+Route::delete('socio/{socio}/eliminar', [SocioController::class, 'destroy'])->name('socio.destroy');

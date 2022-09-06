@@ -34,7 +34,18 @@
         <label  name="fecha_alta" id="fecha_alta" class="form-control"> {{ $socio->created_at->format('d/m/Y H:i') }} </label>
 
     </div>
-
+    <hr>
+    <div class="row">
+        <div class="col-sm-12">
+            <form action="{{ route('socio.destroy', $socio) }}" method="post">
+                @csrf
+                @method('delete')
+                <button type="submit" class="btn btn-danger btn-sm">
+                    Borrar
+                </button>
+            </form>
+        </div>
+    </div>
 
 </div>
 

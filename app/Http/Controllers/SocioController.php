@@ -15,7 +15,7 @@ class SocioController extends Controller
      */
     public function index()
     {
-        $socios= socio::orderBy('apellido')->orderBy('nombre')->get();
+        $socios= socio::orderBy('apellido')->orderBy('nombre')->paginate(10);
         return view('socio.index', compact('socios'));
     }
 

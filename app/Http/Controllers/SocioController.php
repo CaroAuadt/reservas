@@ -108,7 +108,9 @@ class SocioController extends Controller
      */
     public function destroy($id)
     {
-        $socio = Socio::find($id)->delete();
+        $socio = Socio::findOrFail($id);
+        $socio->reservas()->delete();
+        $socio->delete();
 
         return redirect()->route('socios.index')
             ->with('success', 'Socio eliminado satisfactoriamente');

@@ -10,10 +10,14 @@
             <div class="col-md-12">
 
                 @includeif('partials.errors')
-
+                @if ($message = Session::get('error'))
+                <div class="alert alert-danger">
+                    <p>{{ $message }}</p>
+                </div>
+                @endif
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">Create Reserva</span>
+                        <span class="card-title">Agregar Reserva</span>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('reservas.store') }}"  role="form" enctype="multipart/form-data">

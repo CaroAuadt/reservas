@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Reserva;
 use App\Models\Socio;
+use App\Models\socio as ModelsSocio;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Class ReservaController
@@ -60,7 +63,9 @@ class ReservaController extends Controller
                 ->with('error', 'Reserva ya existente! No se puede reservar. Intente con otras butacas');
         } else {
             $reserva = Reserva::create($request->all());
+            $socio= Socio::find($request->socio_id);
 
+            Storage::append('reservas.log', 'Reserva para fecha ' . Carbon::parse($request->fecha_reserva)->format('d/m/Y') . ' en fila:' . $request->fila . ' columna: ' . $request->columna . ' para el socio: '. $socio->apellido . ', ' . $socio->nombre  );
             return redirect()->route('reservas.index')
                 ->with('success', 'Reserva creada satisfactoriamente.');
         }

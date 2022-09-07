@@ -1,53 +1,53 @@
-@extends('layouts.app');
+@extends('layouts.app')
+
+@section('template_title')
+    {{ $socio->nombre ?? 'Show Socio' }}
+@endsection
+
 @section('contenido')
+    <section class="content container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="float-left">
+                            <h5 class="card-title">Ver Socio</h5>
+                        </div>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a class="btn btn-primary me-md-2" href="{{ route('socios.index') }}"> Volver </a>
+                        </div>
+                    </div>
 
-<h3> {{ $socio->apellido . ", ". $socio->nombre }}</h3>
+                    <div class="card-body">
 
+                        <div class="form-group">
+                            <strong>Dni:</strong>
+                            {{ $socio->dni }}
+                        </div>
+                        <div class="form-group">
+                            <strong>Nombre:</strong>
+                            {{ $socio->nombre }}
+                        </div>
+                        <div class="form-group">
+                            <strong>Apellido:</strong>
+                            {{ $socio->apellido }}
+                        </div>
+                        <div class="form-group">
+                            <strong>Celular:</strong>
+                            {{ $socio->celular }}
+                        </div>
+                        <div class="form-group">
+                            <strong>Email:</strong>
+                            {{ $socio->email }}
+                        </div>
+                        <div class="form-group">
+                            <strong>Fecha de Alta:</strong>
+                            {{ $socio->created_at->format('d/m/Y H:i') }}
+                        </div>
 
-<div class="row">
-    <div class="col-sm-12">
-        <label for="nombre" class="form-label">Nombre</label>
-        <label name="nombre" id="nombre" class="form-control" > {{ $socio->nombre }}</label>
-
-    </div>
-    <div class="col-sm-12">
-        <label for="apellido" class="form-label">Apellido</label>
-        <label name="apellido" id="apellido" class="form-control"> {{$socio->apellido  }} </label>
-
-    </div>
-    <div class="col-sm-12">
-        <label for="dni" class="form-label">DNI</label>
-        <label name="dni" id="dni" class="form-control"> {{ $socio->dni }} </label>
-    </div>
-    <div class="col-sm-12">
-        <label for="celular" class="form-label">Celular</label>
-        <label name="celular" id="celular" class="form-control"> {{ $socio->celular }} </label>
-
-    </div>
-    <div class="col-sm-12">
-        <label for="email" class="form-label">Email</label>
-        <label  name="email" id="email" class="form-control"> {{ $socio->email }}</label>
-
-    </div>
-    <div class="col-sm-12">
-        <label for="fecha_alta" class="form-label">Fecha de alta</label>
-        <label  name="fecha_alta" id="fecha_alta" class="form-control"> {{ $socio->created_at->format('d/m/Y H:i') }} </label>
-
-    </div>
-    <hr>
-    <div class="row">
-        <div class="col-sm-12">
-            <form action="{{ route('socio.destroy', $socio) }}" method="post">
-                @csrf
-                @method('delete')
-                <button type="submit" class="btn btn-danger btn-sm">
-                    Borrar
-                </button>
-            </form>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-
-</div>
-
-
+    </section>
 @endsection

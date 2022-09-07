@@ -11,9 +11,12 @@ class socio extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected $perPage = 20;
+
     protected $table='socios';
     protected $fillable=['dni','nombre','apellido','celular','email'];
 
+    
 
 
 }

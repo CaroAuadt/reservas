@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    Agregar Socio
+    Create Reserva
 @endsection
 
 @section('contenido')
@@ -13,13 +13,13 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">Agregar Socio</span>
+                        <span class="card-title">Create Reserva</span>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('socios.store') }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('reservas.store') }}"  role="form" enctype="multipart/form-data">
                             @csrf
 
-                            @include('socio.form')
+                            @include('reserva.form')
 
                         </form>
                     </div>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\SocioController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,4 +19,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('socio', SocioController::class);
+Route::resource('socios', SocioController::class);
+Route::resource('reservas', ReservaController::class);

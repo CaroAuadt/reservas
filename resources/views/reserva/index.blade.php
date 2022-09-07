@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    Listado de Socios
+    Reserva
 @endsection
 
 @section('contenido')
@@ -13,12 +13,12 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <h5 id="card_title">
-                                {{ __('Listado de Socios') }}
+                                {{ __('Reservas') }}
                             </h5>
 
                              <div class="float-right">
-                                <a href="{{ route('socios.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Agregar Nuevo') }}
+                                <a href="{{ route('reservas.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                  {{ __('Crear Nueva') }}
                                 </a>
                               </div>
                         </div>
@@ -36,32 +36,28 @@
                                     <tr>
                                         <th>No</th>
 
-										<th>Dni</th>
-										<th>Nombre</th>
-										<th>Apellido</th>
-										<th>Celular</th>
-										<th>Email</th>
-										<th>Fecha de Alta</th>
+										<th>Fila</th>
+										<th>Columna</th>
+										<th>Fecha Reserva</th>
+										<th>Socio</th>
 
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($socios as $socio)
+                                    @foreach ($reservas as $reserva)
                                         <tr>
                                             <td>{{ ++$i }}</td>
 
-											<td>{{ $socio->dni }}</td>
-											<td>{{ $socio->nombre }}</td>
-											<td>{{ $socio->apellido }}</td>
-											<td>{{ $socio->celular }}</td>
-											<td>{{ $socio->email }}</td>
-											<td>{{ $socio->created_at->format('d/m/Y H:i') }}</td>
+											<td>{{ $reserva->fila }}</td>
+											<td>{{ $reserva->columna }}</td>
+											<td>{{ $reserva->fecha_reserva->format('d/m/Y') }}</td>
+											<td>{{ $reserva->socio->apellido .', ' . $reserva->socio->nombre }}</td>
 
                                             <td>
-                                                <form action="{{ route('socios.destroy',$socio->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('socios.show',$socio->id) }}"><i class="fa fa-fw fa-eye"></i> Ver</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('socios.edit',$socio->id) }}"><i class="fa fa-fw fa-edit"></i> Editar</a>
+                                                <form action="{{ route('reservas.destroy',$reserva->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('reservas.show',$reserva->id) }}"><i class="fa fa-fw fa-eye"></i> Ver</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('reservas.edit',$reserva->id) }}"><i class="fa fa-fw fa-edit"></i> Editar</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Eliminar</button>
@@ -74,7 +70,7 @@
                         </div>
                     </div>
                 </div>
-                {!! $socios->links() !!}
+                {!! $reservas->links() !!}
             </div>
         </div>
     </div>

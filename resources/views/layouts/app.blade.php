@@ -21,8 +21,10 @@
             </div>
         </div>
         <div class="col-sm-12">
-            <a href="{{ route('socio.create') }}" class="btn btn-link"> Crear nuevo Socio </a>
-            <a href="{{ route('socio.index') }}" class="btn btn-link"> Listar Socios </a>
+            <a href="{{ route('socios.create') }}" class="btn btn-link"> Crear nuevo Socio </a>
+            <a href="{{ route('socios.index') }}" class="btn btn-link"> Listar Socios </a>
+            <a href="{{ route('reservas.index') }}" class="btn btn-link"> Listar Reservas </a>
+            <a href="{{ route('reservas.create') }}" class="btn btn-link"> Crear Reserva </a>
         </div>
 <div class="col-sm-12">
 
